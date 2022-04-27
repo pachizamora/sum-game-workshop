@@ -3,8 +3,9 @@ import React from "react";
 
 export default Number = ({ id, number, isSelected, onSelected }) => {
   const handlePress = () => {
-    console.info(number);
-    onSelected(id);
+    if (!isSelected) {
+      onSelected(id);
+    }
   };
 
   return (
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
     marginVertical: 25,
     fontSize: 35,
     textAlign: "center",
-    minHeight: 50,
+    minHeight: 45,
   },
   selected: {
     opacity: 0.3,
