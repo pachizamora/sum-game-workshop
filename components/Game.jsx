@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
 import React, { useEffect, useState, useRef } from "react";
 import Number from "./Number";
+import { Restart } from "fiction-expo-restart";
 
 export default Game = ({ randomNumbersCount, initialSeconds }) => {
   const [randomNumbers, setRandomNumbers] = useState([]);
@@ -61,8 +62,15 @@ export default Game = ({ randomNumbersCount, initialSeconds }) => {
     }
   };
 
+  const onButtonClick = () => {
+    Restart();
+  };
+
   return (
     <View>
+      {remainingSeconds === 0 || gameStatus !== "PLAYING" ? (
+        <Button title="Play Again" color="#000" onPress={onButtonClick} />
+      ) : null}
       <Text style={styles.target}>{target}</Text>
       <Text style={[styles.target, styles[gameStatus]]}>{gameStatus}</Text>
       <Text>{remainingSeconds}</Text>
