@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Button } from "react-native";
 import React, { useEffect, useState, useRef } from "react";
 import Number from "./Number";
 import { Restart } from "fiction-expo-restart";
+import arrayShuffle from "array-shuffle";
 
 export default Game = ({ randomNumbersCount, initialSeconds }) => {
   const [randomNumbers, setRandomNumbers] = useState([]);
@@ -19,12 +20,16 @@ export default Game = ({ randomNumbersCount, initialSeconds }) => {
   // Full array -> Executes on change
   // Return -> Executes on dismount
   useEffect(() => {
-    const numbers = Array.from({ length: randomNumbersCount }).map(
+    let numbers = Array.from({ length: randomNumbersCount }).map(
       () => 1 + Math.floor(10 * Math.random())
     );
     const target = numbers
       .slice(0, randomNumbersCount - 2)
       .reduce((acc, cur) => acc + cur, 0);
+
+    console.log("before arrayShuffle -> " + numbers);
+    numbers = arrayShuffle(numbers);
+    console.log("after arrayShuffle -> " + numbers);
 
     setRandomNumbers(numbers);
     setTarget(target);
